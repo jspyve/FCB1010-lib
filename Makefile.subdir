@@ -1,0 +1,15 @@
+srcfiles := $(wildcard *.c)
+asmsrcfiles := $(wildcard *.asm)
+
+objfiles := $(addprefix $(OBJDIR)\, $(addsuffix .rel, $(basename $(srcfiles))))
+asmobjfiles := $(addprefix $(OBJDIR)\, $(addsuffix .rel, $(basename $(asmsrcfiles))))
+
+all: $(objfiles) $(asmobjfiles)
+
+$(asmobjfiles) : $(asmsrcfiles)
+	sdas8051 -plosgff $(OBJDIR)\$(@F) $(basename $(@F)).asm
+	
+$(objfiles) : $(srcfiles)
+	$(SDCC) $(SDCC_COMPILE_OPTS) -o $(OBJDIR)\$(@F) -c $(basename $(@F)).c
+
+	

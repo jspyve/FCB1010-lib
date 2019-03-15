@@ -1,0 +1,104 @@
+Parameters to be able to edit:
+
+Global
+------
+
+Midi Channel
+EXP A/B calibration
+
+Number of IA switches (1 - 10)
+Controller number for each assigned IA switch (to cater for on/off or X/Y control)
+EXP A controller assignment
+EXP B controller assignment
+Running status on/off
+
+Scene number for switches that aren't used for IA (or just limit to first N scenes)
+  * Scene control should alternate with preset selection mode
+  * Maybe hold down Preset/Scene buttons to change preset
+    and a quick tap changes scene. General thought is that
+    scene changes need to be quick, preset changes can be slower and are
+    less frequent ?
+
+This level of GLOBAL configuration means that basically, every preset just holds the
+programme change number to tell the AXE to select a preset. Might not be flexible
+enough in the short term, but, caters quickly for those who favour a traditional
+pedalboard setup. And it's really simple to setup each preset. By default,
+there will be a 1:1 mapping of Bank:preset to 1-384 program change.
+
+
+Per Preset
+----------
+
+Program Change number
+Switch 1 state
+Switch 2 state
+
+Program change # is awkward as you have to cater for the fact that,
+because of 2-way sync with the Axe, if you turn the preset knob on
+on the Axe and pick a preset linearly, what if the given preset isn't
+represented in the programming of the FCB ? How will the FCB respond ?
+Should the FCB always show the AXE preset number, and configure itself
+accordingly ?  
+
+2-way sync means FCB is always able to dynamically configure everything
+from the Axe. Maybe select the preset from the Axe, and this configures
+the buttons, etc. and puts the FCB straight into scene mode ? Current
+bank and FCB preset index remains as it was.
+
+
+Selecting a preset/bank
+-----------------------
+
+Press UP/enter or DOWN/escape to select a bank
+7 segment display reflects the new bank number, maybe flash, or alternate with preset number
+Pressing 1-10 buttons which are not in use for IA, will select that preset number in the new
+bank.
+Bank size is 10 minus the number of IA switches assigned
+
+Tuner
+-----
+
+Hold UP/enter for 2.5s ?
+Press UP/enter again to cancel ?
+
+No actual Tuner started / stopped messages, just a flood of Tuner status messages while-ever
+tuner is active. Detect tuner finished by absence of these messages for an arbitrary timeout
+period.
+
+Tap Tempo
+---------
+
+Tap active preset/scene button.
+
+
+Sysex passthrough / midi merge
+------------------------------
+
+Needs more thought.
+
+
+Existing FCB edit behaviour
+---------------------------
+
+To enter configuration mode:
+
+1. Hold DOWN/escape while powering on
+2. Use UP/enter to move between config pages
+3. Hold DOWN/escape for 2.5s to save changes
+
+Global
+Direct Select
+Midi Function
+  * 1 - 10 indicate which functions midi channel to edit (led blinks)
+  * UP/enter confirm function
+  * Select channel using 1-10 or EXP A
+  * DOWN/escape to cancel
+
+
+Preset Edit
+
+DOWN/escape for 2.5s with chosen preset selected
+Activate which Midi function to edit by holding 1 - 10 down for 1.5s
+
+
+
